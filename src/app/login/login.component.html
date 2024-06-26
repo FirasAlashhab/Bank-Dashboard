@@ -1,0 +1,104 @@
+<div class="login-page" style="display: flex; flex-direction: column">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align: center">Sign In</mat-card-title>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab label="Sign In">
+        <mat-card-content>
+          <form [formGroup]="form" (submit)="onSubmit()">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input
+                autocomplete="email"
+                type="email"
+                matInput
+                placeholder="Ex: pat@example.com"
+                formControlName="email"
+              />
+              <mat-error *ngIf="form.get('email')?.hasError('required')"
+                >Email is required</mat-error
+              >
+              <mat-error *ngIf="form.get('email')?.hasError('email')"
+                >Email is invalid</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Enter your password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                type="password"
+                formControlName="password"
+                (keydown.enter)="$event.preventDefault(); login()"
+              />
+              <mat-error *ngIf="form.get('password')?.hasError('required')"
+                >Password is required</mat-error
+              >
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              class="login-button"
+              type="submit"
+              [disabled]="!form.valid"
+              *ngIf="!isLogging"
+            >
+              Sign In
+            </button>
+            <mat-spinner
+              diameter="50"
+              class="loader"
+              *ngIf="isLogging"
+            ></mat-spinner>
+          </form>
+          <div
+            class="mt-5"
+            style="
+              width: 100%;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-top: 20px !important;
+              font-size: 24px !important;
+            "
+          >
+            <h2>Available Users</h2>
+          </div>
+          <div
+            style="
+              padding: 20px 0 10px 20px;
+              width: 100%;
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              padding-top: 20px !important;
+            "
+          >
+            <p>{{ email }}</p>
+            <p>{{ password }}</p>
+            <br />
+            <p>{{ email1 }}</p>
+            <p>{{ password1 }}</p>
+            <br />
+            <p>{{ email2 }}</p>
+            <p>{{ password2 }}</p>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

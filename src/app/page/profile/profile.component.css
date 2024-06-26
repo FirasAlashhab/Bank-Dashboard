@@ -1,0 +1,199 @@
+.cards-container {
+  display: flex;
+  width: 100%;
+  border-radius: 15px !important;
+}
+
+.example-card {
+  flex: 33%;
+  border-radius: 15px !important;
+  margin: 25px 12.5px 25px 25px;
+  height: 100%;
+}
+
+.example-card-2 {
+  flex: 66%;
+  border-radius: 15px !important;
+  margin: 25px 25px 25px 12.5px;
+  padding: 15px 10px;
+}
+
+.card-header {
+  padding: 0;
+  height: 120px;
+  overflow: hidden;
+}
+
+.header-img {
+  position: relative;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  min-height: 100% !important;
+  object-fit: cover;
+  object-position: top;
+}
+
+.banner-input {
+  position: absolute;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.profile-image {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid white;
+  overflow: hidden;
+  z-index: 100;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.profile-input {
+  position: absolute;
+  z-index: 10000;
+  top: 150px;
+  cursor: pointer;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -40px;
+}
+
+.card-content a {
+  text-decoration: none;
+}
+
+.card-content a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+.card-content h1 {
+  font-weight: 500;
+  color: black;
+}
+
+.card-content p {
+  opacity: 0.5;
+}
+
+.footer {
+  border-top: 1px solid lightgray;
+  text-align: center;
+  padding: 0 40px;
+  margin-top: 40px;
+  padding-top: 15px;
+  display: flex;
+  min-width: 100%;
+  width: 100%;
+  justify-content: space-between !important;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bank-accounts,
+.bank-transactions,
+.bank-premium {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer p {
+  opacity: 1;
+}
+
+.label-field {
+  padding-bottom: 6px;
+}
+
+mat-card-title {
+  font-weight: 300;
+  font-size: 1.5rem;
+  padding-bottom: 15px;
+}
+
+.roww {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  padding-top: 25px;
+}
+
+.form-group-container {
+  width: 100%;
+}
+
+.form-group-btn {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 767px) {
+  .cards-container {
+    flex-direction: column;
+  }
+
+  .example-card,
+  .example-card-2 {
+    margin: 25px 25px 25px 25px;
+  }
+  .roww {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.for-banner-input {
+  position: absolute;
+  background-color: #fff;
+  display: flex;
+  color: #000;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  cursor: pointer;
+  padding: 4px 15px;
+  border-radius: 5px;
+  z-index: 99;
+  top: 90px;
+  right: 0.3%;
+  font-size: 10px;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.for-banner-input:hover {
+  opacity: 0.8;
+}
+
+.for-profile-input {
+  position: relative;
+  background-color: lightgray;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+  top: 60px;
+  right: 50%;
+  left: 50%;
+  margin-left: 25px;
+  transition: all 0.2s;
+}
+
+.for-profile-input:hover {
+  background-color: rgb(152, 152, 152);
+}

@@ -1,0 +1,287 @@
+<mat-card class="example-card-2">
+  <div
+    class="mt-5"
+    style="
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px !important;
+      font-size: 24px !important;
+    "
+  >
+    <h2>Available Bank Accounts</h2>
+  </div>
+  <div
+    style="
+      padding: 20px 0 10px 20px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px !important;
+    "
+  >
+    <p>{{ email }}</p>
+    <p>{{ password }}</p>
+    <br />
+    <p>{{ email1 }}</p>
+    <p>{{ password1 }}</p>
+    <br />
+    <p>{{ email2 }}</p>
+    <p>{{ password2 }}</p>
+  </div>
+  <mat-card-header style="display: flex; justify-content: center">
+    <mat-card-title *ngIf="!firstForm">Transfer</mat-card-title>
+    <mat-card-title *ngIf="firstForm">Enter Payment Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="edit-profile-card">
+    <form *ngIf="!firstForm" #f="ngForm" (submit)="submitForm(f)">
+      <div class="example-container">
+        <mat-card-header>
+          <mat-card-title *ngIf="!firstForm">Select beneficiary</mat-card-title>
+          <mat-card-title *ngIf="firstForm"
+            >Enter Payment Details</mat-card-title
+          >
+        </mat-card-header>
+        <div class="containerr">
+          <div class="item-error-container">
+            <mat-form-field>
+              <mat-label>Alias Type</mat-label>
+              <mat-select
+                [(ngModel)]="selectedAliasType"
+                name="aliasType"
+                id="aliasType"
+                required
+              >
+                <mat-option value="AliasName">Alias Name</mat-option>
+                <mat-option value="MobileNumber">Mobile Number</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Error message for From -->
+            <div
+              *ngIf="
+                f &&
+                f.controls &&
+                f.controls['aliasType'] &&
+                f.controls['aliasType'].invalid &&
+                (f.controls['aliasType'].dirty ||
+                  f.controls['aliasType'].touched)
+              "
+            >
+              <div style="margin-top: -20px" class="text-danger">
+                Alias Type is required.
+              </div>
+            </div>
+          </div>
+          <div class="item-error-container">
+            <mat-form-field>
+              <mat-label
+                *ngIf="
+                  selectedAliasType == 'AliasName' || selectedAliasType === ''
+                "
+                class="label-field"
+                >Alias Name</mat-label
+              >
+              <mat-label
+                *ngIf="selectedAliasType == 'MobileNumber'"
+                class="label-field"
+                >Mobile Number</mat-label
+              >
+              <input
+                matInput
+                [disabled]="selectedAliasType === ''"
+                type="text"
+                id="input"
+                name="input"
+                [(ngModel)]="aliasNameOrMobileNumber"
+                [placeholder]="customizingPlaceHolder()"
+                required
+              />
+            </mat-form-field>
+            <div style="margin-top: -20px" class="errors-container">
+              <div
+                *ngIf="
+                  f &&
+                  f.controls &&
+                  f.controls['input'] &&
+                  f.controls['input'].invalid &&
+                  (f.controls['input'].dirty || f.controls['input'].touched)
+                "
+              >
+                <div class="text-danger">
+                  Alias Name or Mobile Number is required.
+                </div>
+              </div>
+              <div *ngIf="!firstForm && formSubmitted">
+                <div class="text-danger">
+                  Alias Name or Mobile Number is invalid.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="roww" *ngIf="!firstForm">
+        <mat-spinner
+          diameter="50"
+          class="loader"
+          style="margin: auto"
+          *ngIf="isloading"
+        ></mat-spinner>
+        <div *ngIf="!isloading">
+          <button
+            [disabled]="selectedAliasType === '' || !aliasNameOrMobileNumber"
+            type="submit"
+            class="btn btn-primary btn-round"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- To and From -->
+    <form *ngIf="firstForm" #form="ngForm" (submit)="submitForm2(form)">
+      <div class="containerr">
+        <mat-form-field>
+          <mat-label>To</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            id="to"
+            name="to"
+            [(ngModel)]="aliasIban"
+          />
+        </mat-form-field>
+
+        <div class="item-error-container">
+          <mat-form-field>
+            <mat-label>From</mat-label>
+            <mat-select [(ngModel)]="from" name="from" id="from" required>
+              <mat-option
+                *ngFor="let option of formOptions"
+                [value]="option.value"
+                >{{ option.label }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <!-- Error message for From -->
+          <div
+            *ngIf="
+              form &&
+              form.controls &&
+              form.controls['from'] &&
+              form.controls['from'].invalid &&
+              (form.controls['from'].dirty || form.controls['from'].touched)
+            "
+          >
+            <div style="margin-top: -20px" class="text-danger">
+              From is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transfer Purpose -->
+
+      <div class="containerr">
+        <div class="item-error-container">
+          <mat-form-field>
+            <mat-label>Transfer Purpose</mat-label>
+            <mat-select
+              [(ngModel)]="transferPurpose"
+              id="transferPurpose"
+              name="transferPurpose"
+              required
+            >
+              <mat-option value="FriendorFamily"
+                >Transfer to Friend or Family at a bank</mat-option
+              >
+              <mat-option value="OwnAccount"
+                >Transfer to Own Account at a bank</mat-option
+              >
+              <mat-option value="ServicePayment"
+                >Goods/Services payment</mat-option
+              >
+              <mat-option value="OwnAccountLoan"
+                >Transfer to Own Account for loan installment at another
+                bank</mat-option
+              >
+              <mat-option value="AidCharityGrant"
+                >Transfer for Aid or Charity or Grant</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <!-- Error message for From -->
+          <div
+            *ngIf="
+              form &&
+              form.controls &&
+              form.controls['transferPurpose'] &&
+              form.controls['transferPurpose'].invalid &&
+              (form.controls['transferPurpose'].dirty ||
+                form.controls['transferPurpose'].touched)
+            "
+          >
+            <div
+              style="margin-top: -25px; margin-bottom: 25px"
+              class="text-danger"
+            >
+              Transfer Purpose is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amount -->
+
+      <div class="containerr">
+        <div class="item-error-container">
+          <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <label></label>
+            <input
+              matInput
+              type="text"
+              id="amount"
+              name="amount"
+              required
+              placeholder="0000"
+              (keypress)="onKeyPress($event)"
+              [(ngModel)]="amount"
+            />
+          </mat-form-field>
+
+          <!-- Error message for Amount -->
+          <div
+            *ngIf="
+              form &&
+              form.controls &&
+              form.controls['amount'] &&
+              form.controls['amount'].invalid &&
+              (form.controls['amount'].dirty || form.controls['amount'].touched)
+            "
+          >
+            <div style="margin-top: -25px" class="text-danger">
+              Amount is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="roww">
+        <div class="form-group-btn">
+          <button type="submit" class="btn btn-primary btn-round">
+            Continue
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

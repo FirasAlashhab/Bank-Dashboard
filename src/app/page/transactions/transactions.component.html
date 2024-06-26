@@ -1,0 +1,105 @@
+<!-- 
+1. Reference Number:      A reference number for the transaction.
+2. From Account:          The source account for the transaction(account number (last 16 char of the IBAN)).
+3. To Account:            The destination account for the transaction(account number (last 16 char of the IBAN)).
+4. Amount:                The monetary amount involved in the transaction( | currency).
+5. Date and Time:         When the transaction occurred.
+6. Transaction Type:      Whether it's a deposit, withdrawal, transfer, or other types.
+7. Status:                Whether the transaction was successful or failed.
+
+
+show details when click:
+
+1. Transaction ID: A unique identifier for the transaction.
+2. Date and Time: When the transaction occurred.
+3. Amount: The monetary amount involved in the transaction.
+4. From Account: The source account for the transaction.
+5. To Account: The destination account for the transaction.
+6. Transaction Type: Whether it's a deposit, withdrawal, transfer, or other types.
+7. Status: Whether the transaction was successful or failed.
+8. Description/Note: Any additional information or note related to the transaction.
+9. Reference Number: A reference number for the transaction.
+10. Payment Method: The method used for the transaction (credit card, bank transfer, etc.).
+11. Fee: Any transaction fees associated with the transaction.
+12. Currency: The currency used for the transaction. 
+-->
+
+<div class="containerrr">
+  <mat-form-field class="example-form-field">
+    <mat-label>Search by Id...</mat-label>
+    <input matInput type="text" [(ngModel)]="searchTerm" />
+    <button
+      *ngIf="searchTerm"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="searchTerm = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Transactions Type</mat-label>
+    <mat-select [(ngModel)]="type" name="type" id="type">
+      <mat-option value="all">All</mat-option>
+      <mat-option value="sent">Sent</mat-option>
+      <mat-option value="received">Received</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngFor="let card of userData?.cards">
+    <div
+      class="containerr"
+      *ngFor="let transaction of getFilteredTransactions(card).reverse()"
+    >
+      <div>
+        <mat-card
+          class="flex"
+          [ngStyle]="getTransactionStyle(transaction.status)"
+        >
+          <mat-card-content>
+            <p>Transaction Id: {{ transaction.uid }}</p>
+            <p>From: {{ transaction.from }}</p>
+            <p *ngIf="transaction.type === 'transfer'">
+              To: {{ transaction.to }}
+            </p>
+            <p>Amount: {{ (transaction.amount | currency) + "JOD" }}</p>
+            <p>Date and Time: {{ transaction.time }}</p>
+            <p>Transaction Type: {{ transaction.type }}</p>
+            <p>Status: {{ transaction.status }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Self aware panel
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Self aware panel
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+</mat-accordion> -->
+</div>

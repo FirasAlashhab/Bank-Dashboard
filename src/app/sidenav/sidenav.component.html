@@ -1,0 +1,15 @@
+<mat-nav-list class="menu-list">
+  <div class="logo d-flex align-items-center">
+    <img src="../../assets/img/angular2-logo.png" alt="Logo">
+    <h2 mat-subheader>FIRAS BANK</h2>
+  </div>
+  <a mat-list-item 
+    routerLinkActive="list-item-active" 
+    [routerLink]="menuItem.path" 
+    *ngFor="let menuItem of menuItems"
+    (click)="onLinkClick()">
+
+    <mat-icon>{{menuItem.icon}}</mat-icon> {{menuItem.title}}
+    
+  </a>
+</mat-nav-list>

@@ -1,0 +1,40 @@
+.menu-list .logo {
+  display: flex;
+  align-items: center;
+  padding: 11px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.logo h2 {
+  margin: 0 !important;
+}
+
+.logo img {
+  width: 34px;
+  margin-right: 16px;
+}
+
+mat-icon {
+  vertical-align: center !important;
+  margin-right: 1rem;
+  margin-left: 0.75rem;
+  margin-bottom: 4px;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  font-size: 14px !important;
+  display: flex;
+  align-items: center !important;
+}
+
+.mat-list {
+  text-decoration: none;
+  color: #ff0000 !important;
+  font-size: 0.8rem !important;
+  height: 44px !important;
+  margin-bottom: 4px;
+}

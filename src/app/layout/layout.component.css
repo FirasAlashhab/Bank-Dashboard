@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer {
+  width: 260px;
+  background-color: #f8f9fa;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer-content {
+  background-color: #f4f3ef;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

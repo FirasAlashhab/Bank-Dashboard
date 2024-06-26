@@ -1,0 +1,115 @@
+<div class="containerr">
+    <div class="card" *ngFor="let card of userData?.cards; let i = index" (click)="showCardDetails(i)">
+      <div class="card-inner">
+        <div class="front">
+            <img src="../../../assets/card/images/map.png" class="map-img">
+          <div class="card-top">
+            <div class="rowww">
+              <p>My Balance</p>
+              <h1>{{ card?.balance | currency }}</h1>
+            </div>
+            <img class="visa-img" src="../../../assets/card/images/visa.png">
+          </div>
+          <div class="roww card-no">
+            <p>****</p>
+            <p>****</p>
+            <p>****</p>
+            <p>{{ card?.cardNumber?.part2 }}</p>
+          </div>
+          <div class="roww card-holder"> 
+            <p>CARD HOLDER</p>
+            <p>VALID TILL</p>
+          </div>
+          <div class="roww name">
+            <p>{{ userData?.firstName | uppercase }} {{ userData?.lastName | uppercase }}</p>
+            <p>{{ card?.validTill }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="cards-containerr" *ngIf="selectedCardIndex !== null && userData?.cards && userData?.cards[selectedCardIndex]">
+    <mat-card class="example-card-2">
+      <mat-card-header>
+        <mat-card-title>Card Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="edit-profile-card">
+        <form>
+          <div class="roww-2">
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">First Name</label>
+                <input disabled type="text" class="form-control" [value]="userData?.firstName" name="company">
+              </div>
+            </div>
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">Last Name</label>
+                <input disabled type="text" class="form-control" [value]="userData?.lastName" name="username">
+              </div>
+            </div>
+          </div>
+          <div class="roww-2">
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">IBAN</label>
+                <input disabled type="text" class="form-control" [value]="userData?.cards[selectedCardIndex]?.IBAN">
+              </div>
+            </div>
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">Card Number</label>
+                <input disabled type="text" class="form-control" [value]="'4244' + ' ' + '5400' + ' ' + userData?.cards[selectedCardIndex]?.cardNumber?.part1 + ' ' + userData?.cards[selectedCardIndex]?.cardNumber?.part2">
+              </div>
+            </div>
+          </div>
+          <div class="roww-2">
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">Balance</label>
+                <input disabled type="text" class="form-control" [value]="userData?.cards[selectedCardIndex]?.balance | currency">
+              </div>
+            </div>
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">CCV</label>
+                <input disabled type="text" class="form-control" [value]="userData?.cards[selectedCardIndex]?.ccv">
+              </div>
+            </div>
+          </div>
+          <div class="roww-2">
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">Release Date</label>
+                <input disabled type="text" class="form-control" [value]="userData?.cards[selectedCardIndex]?.releaseDate">
+              </div>
+            </div>
+            <div class="form-group-container">
+              <div class="form-group">
+                <label class="label-field">Valid Till</label>
+                <input disabled type="text" class="form-control" [value]="userData?.cards[selectedCardIndex]?.validTill">
+              </div>
+            </div>
+          </div>
+          <div class="roww-2">
+            <div class="form-group-container">
+              <div class="form-group-btn">
+                <label class="label-field">Transactions</label>
+                <p class="transactions-link">
+                  <!-- <input type="text" class="form-control" [value]="userData?.['transaction' + (selectedCardIndex + 1)]"> -->
+                  Total Transactions: {{ countCardTransactions() }}
+                  <a  routerLink="/transactions">
+                    View details
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="roww-2">
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bank-dashboard-8668f": {
+      "hosting": {
+        "bank-dashboard": [
+          "bank-dashboard-8668f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bank-dashboard-8668f"
+  }
+}

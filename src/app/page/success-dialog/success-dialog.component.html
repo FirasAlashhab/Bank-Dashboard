@@ -1,0 +1,14 @@
+<div class="container">
+    <img src="../../../assets/img/success.png" alt="error" width="100px">
+    <h1 mat-dialog-title>Success</h1>
+    <div mat-dialog-content>The payment to {{ firstName | uppercase }} {{ lastName | uppercase }} {{ lastName | lowercase }} is completed successfully</div>
+    <div class="new-container">
+        <p>Reference Number: {{ uid }}</p>
+        <p>Beneficiary: {{ firstName | uppercase }} {{ lastName| uppercase }}</p>
+        <p>IBAN: {{ iban }}</p>
+        <p>Amount: JOD {{ amount | currency }}</p>
+    </div>
+    <div>
+      <button (click)="refreshPage()" mat-dialog-close class="btn btn-primary btn-round">Done</button>
+    </div>
+</div>

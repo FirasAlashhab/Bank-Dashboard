@@ -1,0 +1,29 @@
+.containerrr {
+    padding: 25px;
+    width: 100%;
+}
+
+mat-card {
+    margin-bottom: 10px;
+}
+
+mat-card-content {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+mat-card-content p {
+    margin: 0;
+    margin-right: 15px;
+}
+
+mat-card-content p:last-child {
+    margin-right: 0;
+}
+
+:host ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+  

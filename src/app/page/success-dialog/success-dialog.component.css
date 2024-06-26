@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    padding: 25px 20px;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+    text-align: center;
+}
+
+.new-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+}
+
+.btn {
+    margin-top: 15px;
+}
